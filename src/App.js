@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Highlighter from "react-highlight-words";
+import { AiOutlineSearch } from 'react-icons/ai';
 
 function App() {
 
@@ -20,7 +21,6 @@ function App() {
     }
   }
 
-  const highlight = React.useRef(null);
   React.useEffect(() => {
     if (searchTerm !== '') {
       setCount(document.getElementsByClassName('response').length);
@@ -36,11 +36,15 @@ function App() {
       <input type="file" className='file_choose' onChange={(e) => handleFileChange(e)} />
       {file &&
         <>
-          <input type="text" className='search' autoFocus onChange={(e) => setSearchTerm(e.target.value)} placeholder='Search' />
+          <div className='searchbox'>
+            <input type="text" className='search' autoFocus onChange={(e) => setSearchTerm(e.target.value)} placeholder='Search' />
+            <a className='search-btn' href="/">
+              <AiOutlineSearch />
+            </a>
+          </div>
           <div className='box'>
             <Highlighter
               highlightClassName="response"
-              useRef={highlight}
               searchWords={[searchTerm]}
               autoEscape={true}
               textToHighlight={file}
@@ -49,7 +53,7 @@ function App() {
           <p className='occurences'>Number of occurences of {searchTerm} : {count}</p>
         </>
       }
-    </div>
+    </div >
   );
 }
 
